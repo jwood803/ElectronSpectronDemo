@@ -21,25 +21,21 @@ global.before(function () {
 });
 
 describe('Test Example', function () {
-    beforeEach(function () {
-        return app.start();
-    });
+  beforeEach(function () {
+      return app.start();
+  });
 
-    afterEach(function () {
-        return app.stop();
-    });
+  afterEach(function () {
+      return app.stop();
+  });
 
   it('opens a window', function () {
     return app.client.waitUntilWindowLoaded()
       .getWindowCount().should.eventually.equal(1);
   });
 
-    // it('should test', function () {
-    //     app.start().then(function () {
-    //         return app.client.getTitle();
-    //     })
-    //     .then(function (title) {
-    //         title.should.equal('2');
-    //     });            
-    // });
+  it('tests the title', function () {
+    return app.client.waitUntilWindowLoaded()
+      .getTitle().should.eventually.equal('Hello World!');
+  });
 });
