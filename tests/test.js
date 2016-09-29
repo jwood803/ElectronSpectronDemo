@@ -1,5 +1,4 @@
 const Application = require("spectron").Application;
-const assert = require("assert");
 const path = require('path');
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
