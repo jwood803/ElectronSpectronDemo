@@ -3,11 +3,14 @@ const path = require('path');
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 
-var electronPath = path.join(__dirname, '..', 'node_modules', '.bin', 'electron')
-if (process.platform === 'win32') electronPath += '.cmd'
+var electronPath = path.join(__dirname, '..', 'node_modules', '.bin', 'electron');
+
+if (process.platform === 'win32') {
+    electronPath += '.cmd';
+}
 
 // Path to your application
-var appPath = path.join(__dirname, '..')
+var appPath = path.join(__dirname, '..');
 
 var app = new Application({
             path: electronPath,
