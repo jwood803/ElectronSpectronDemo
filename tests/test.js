@@ -2,6 +2,9 @@ const Application = require("spectron").Application;
 const path = require('path');
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
+const testPage = require('./test.page.js');
+
+var page = new testPage();
 
 var electronPath = path.join(__dirname, '..', 'node_modules', '.bin', 'electron');
 
@@ -33,11 +36,11 @@ describe('Test Example', function () {
 
   it('opens a window', function () {
     return app.client.waitUntilWindowLoaded()
-      .getWindowCount().should.eventually.equal(1);
+      .getWindowCount().should.eventually.equal(page.windowCount);
   });
 
   it('tests the title', function () {
     return app.client.waitUntilWindowLoaded()
-      .getTitle().should.eventually.equal('Hello World!');
+      .getTitle().should.eventually.equal(page.pageTitle);
   });
 });
