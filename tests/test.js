@@ -23,6 +23,7 @@ var app = new Application({
 global.before(function () {
     chai.should();
     chai.use(chaiAsPromised);
+    page.setApp(app);
 });
 
 describe('Test Example', function () {
@@ -35,12 +36,14 @@ describe('Test Example', function () {
   });
 
   it('opens a window', function () {
-    return app.client.waitUntilWindowLoaded()
-      .getWindowCount().should.eventually.equal(page.windowCount);
+    return page.getWindowCount().should.eventually.equal(page.windowCount);
   });
 
   it('tests the title', function () {
-    return app.client.waitUntilWindowLoaded()
-      .getTitle().should.eventually.equal(page.pageTitle);
+    return page.getApplicationTitle().should.eventually.equal(page.pageTitle);
+  });
+
+  it('clicks the button', function() {
+    return page.clickButtonAndGetText().should.eventually.equal(page.helloText);
   });
 });
