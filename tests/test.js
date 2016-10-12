@@ -36,14 +36,14 @@ describe('Test Example', function () {
   });
 
   it('opens a window', function () {
-    return page.getWindowCount().should.eventually.equal(page.windowCount);
+    page.getWindowCount().should.eventually.equal(page.windowCount);
   });
 
   it('tests the title', function () {
-    return page.getApplicationTitle().should.eventually.equal(page.pageTitle);
+    page.getApplicationTitle().should.eventually.equal(page.pageTitle);
   });
 
-  it('clicks the button', function() {
-    return page.clickButtonAndGetText().should.eventually.equal(page.helloText);
+  it('clicks the button', function () {
+    page.clickButtonAndGetText().should.eventually.equal(page.helloText);
   });
 });
