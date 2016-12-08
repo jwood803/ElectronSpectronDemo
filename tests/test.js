@@ -27,15 +27,17 @@ global.before(function () {
 });
 
 describe('Test Example', function () {
-  beforeEach(function () {
-      return app.start();
+  beforeEach(function (done) {
+      app.start().then(function() { done(); } );
   });
 
-  afterEach(function () {
-      return app.stop();
+  afterEach(function (done) {
+      app.stop().then(function() { done(); });
   });
 
   it('opens a window', function () {
+    app.client.debug();
+
     page.getWindowCount().should.eventually.equal(page.windowCount);
   });
 
