@@ -1,9 +1,3 @@
-To run this
-===========
-npm install
-nnpm run test:e2e
-
-
 Spectron demo in Electron
 =========================
 
@@ -16,3 +10,10 @@ The main Electron project was built on top of Electron's [quick start repository
 This repository hosts the code for two blog posts regarding Spectron:
 - [End-To-End Testing Electron Apps With Spectron](http://devcenter.wintellect.com/jwood/end-end-testing-electron-apps-spectron)
 - [Creating Page Files For Spectron Tests](http://devcenter.wintellect.com/jwood/creating-page-files-spectron-tests)
+
+To run the tests:
+===========
+
+Execute
+    npm install
+    npm run test:e2e
