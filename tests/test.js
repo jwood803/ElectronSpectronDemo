@@ -41,11 +41,31 @@ describe('Test Example', function () {
     page.getWindowCount().should.eventually.equal(page.windowCount);
   });
 
-  it('tests the title', function () {
-    page.getApplicationTitle().should.eventually.equal(page.pageTitle);
+  it('logs the title', function () {
+      app.client.waitUntilWindowLoaded().getTitle().then(function (txt) { console.warn(txt); });
   });
 
-  it('clicks the button', function () {
+    it('tests the NOT title', function () {
+        app.client.waitUntilWindowLoaded().getTitle().then(function (txt) { chai.expect(txt).to.not.equal("NOT" + page.pageTitle); });
+    });
+
+    it('should fail: tests the NOT title', function () {
+        app.client.waitUntilWindowLoaded().getTitle().then(function (txt) { chai.expect(txt).to.equal("NOT" + page.pageTitle); });
+    });
+
+    it('tests the page title', function () {
+        page.getApplicationTitle().should.eventually.equal(page.pageTitle);
+    });
+
+    it('tests the NOT page title', function () {
+        page.getApplicationTitle().should.eventually.not.equal("NOT" + page.pageTitle);
+    });
+
+    it('should fail: tests the NOT page title', function () {
+        page.getApplicationTitle().should.eventually.equal("NOT" + page.pageTitle);
+    });
+
+    it('clicks the button', function () {
     page.clickButtonAndGetText().should.eventually.equal(page.helloText);
   });
 });
