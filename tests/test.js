@@ -28,19 +28,19 @@ global.before(function () {
 });
 
 describe('Test Example', function () {
-    beforeEach(function (done) {
-        app.start().then(function() { done(); } );
+    beforeEach(function () {
+        return app.start();
     });
 
-    afterEach(function (done) {
-        app.stop().then(function() { done(); });
+    afterEach(function () {
+        return app.stop();
     });
 
-    it('yes == no should fail', function () {
+    it('should fail, yes == no ', function () {
         chai.expect("yes").to.equal("no");
     });
 
-    it('yes == yes should succeed', function () {
+    it('should succeed, yes == yes', function () {
         chai.expect("yes").to.equal("yes");
     });
 
@@ -71,36 +71,40 @@ describe('Test Example', function () {
     });
 
     it('should succeed, tests the not NOT title', function () {
-        app.client.waitUntilWindowLoaded().getTitle().then(function (txt) { chai.expect(txt).to.not.equal("NOT" + page.pageTitle); });
+        return app.client.waitUntilWindowLoaded().getTitle().then(function (txt) { chai.expect(txt).to.not.equal("NOT" + page.pageTitle); });
     });
 
     it('should fail, tests the NOT title', function () {
-        app.client.waitUntilWindowLoaded().getTitle().then(function (txt) { chai.expect(txt).to.equal("NOT" + page.pageTitle); });
+        return app.client.waitUntilWindowLoaded().getTitle().then(function (txt) { chai.expect(txt).to.equal("NOT" + page.pageTitle); });
     });
 
     it('should succeed, tests the page title', function () {
-        page.getApplicationTitle().should.eventually.equal(page.pageTitle);
+        return page.getApplicationTitle().should.eventually.equal(page.pageTitle);
     });
 
     it('should fail, tests the NOT page title', function () {
-        page.getApplicationTitle().should.eventually.not.equal("NOT" + page.pageTitle);
+        return page.getApplicationTitle().should.eventually.not.equal("NOT" + page.pageTitle);
     });
 
     it('should fail, tests the NOT page title', function () {
-        page.getApplicationTitle().should.eventually.equal("NOT" + page.pageTitle);
+        return page.getApplicationTitle().should.eventually.equal("NOT" + page.pageTitle);
     });
 
     it('should succeed, tests window open count', function () {
         app.client.debug();
-        page.getWindowCount().should.eventually.equal(page.windowCount);
+        return page.getWindowCount().should.eventually.equal(page.windowCount);
     });
 
     it('should fail, tests window open count', function () {
         app.client.debug();
-        page.getWindowCount().should.eventually.equal(page.windowCount + 1);
+        return page.getWindowCount().should.eventually.equal(page.windowCount + 1);
     });
 
-    it('clicks the button', function () {
-        page.clickButtonAndGetText().should.eventually.equal(page.helloText);
+    it('should succeed, clicks the button', function () {
+        return page.clickButtonAndGetText().should.eventually.equal(page.helloText);
+    });
+
+    it('should fail, clicks the button', function () {
+        return page.clickButtonAndGetText().should.eventually.equal("NOT" + page.helloText);
     });
 });
