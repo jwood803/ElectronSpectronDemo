@@ -36,11 +36,6 @@ describe('Test Example', function () {
         app.stop().then(function() { done(); });
     });
 
-    it('opens a window', function () {
-        app.client.debug();
-        page.getWindowCount().should.eventually.equal(page.windowCount);
-    });
-
     it('yes == no should fail', function () {
         chai.expect("yes").to.equal("no");
     });
@@ -49,48 +44,60 @@ describe('Test Example', function () {
         chai.expect("yes").to.equal("yes");
     });
 
-    it.only('logs the title', function () {
+    it('should fail, yes != no', function () {
+        function fn() {
+            var yes = 'yes';
+            yes.should.equal('no');
+        }
+        fn();
+    });
+
+    it('should fail, pass in text', function () {
         function fn(txt) {
             var yes = 'yes';
-            //yes.should.be.a('string');
-            yes.should.equal('no');
-            //yes.should.have.lengthOf(2);
+            yes.should.equal(txt);
         }
-        ("text")
+        fn("no");
     });
 
-    it('logs the title', function () {
+    it('should fail, waitUntilWindowLoaded, yes != no', function () {
         app.client.waitUntilWindowLoaded().getTitle().then(
             function (txt) {
+                console.log('txt = ' + txt);
                 var yes = 'yes';
-                //yes.should.be.a('string');
                 yes.should.equal('no');
-                //yes.should.have.lengthOf(2);
             }
         );
-
-        //app.client.waitUntilWindowLoaded().getTitle().then(function (txt) { console.warn(txt); });
-        //app.client.waitUntilWindowLoaded().getTitle().then(function (txt) { console.warn(typeof txt); });
     });
 
-    it('tests the NOT title', function () {
+    it('should succeed, tests the not NOT title', function () {
         app.client.waitUntilWindowLoaded().getTitle().then(function (txt) { chai.expect(txt).to.not.equal("NOT" + page.pageTitle); });
     });
 
-    it('should fail: tests the NOT title', function () {
+    it('should fail, tests the NOT title', function () {
         app.client.waitUntilWindowLoaded().getTitle().then(function (txt) { chai.expect(txt).to.equal("NOT" + page.pageTitle); });
     });
 
-    it('tests the page title', function () {
+    it('should succeed, tests the page title', function () {
         page.getApplicationTitle().should.eventually.equal(page.pageTitle);
     });
 
-    it('tests the NOT page title', function () {
+    it('should fail, tests the NOT page title', function () {
         page.getApplicationTitle().should.eventually.not.equal("NOT" + page.pageTitle);
     });
 
-    it('should fail: tests the NOT page title', function () {
+    it('should fail, tests the NOT page title', function () {
         page.getApplicationTitle().should.eventually.equal("NOT" + page.pageTitle);
+    });
+
+    it('should succeed, tests window open count', function () {
+        app.client.debug();
+        page.getWindowCount().should.eventually.equal(page.windowCount);
+    });
+
+    it('should fail, tests window open count', function () {
+        app.client.debug();
+        page.getWindowCount().should.eventually.equal(page.windowCount + 1);
     });
 
     it('clicks the button', function () {
