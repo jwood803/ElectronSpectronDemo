@@ -1,5 +1,5 @@
 var TestPage = function () {
-    const app;
+    var app;
 
     this.windowCount = 1;
     this.pageTitle = 'Hello World!';

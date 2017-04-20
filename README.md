@@ -1,3 +1,9 @@
+To run this
+===========
+npm install
+nnpm run test:e2e
+
+
 Spectron demo in Electron
 =========================
 
